@@ -21,8 +21,7 @@ async function getContactById(contactId) {
     const contact = contacts.find((c) => c.id === contactId);
     return contact;
   } catch (error) {
-    console.error("Error reading contacts:", error.message);
-    throw error;
+    handleError(error);
   }
 }
 
@@ -37,8 +36,7 @@ async function removeContact(contactId) {
 
     return true;
   } catch (error) {
-    console.error("Error reading or writing contacts:", error.message);
-    throw error;
+    handleError(error);
   }
 }
 
@@ -60,9 +58,13 @@ async function addContact(name, email, phone) {
 
     return newContact;
   } catch (error) {
-    console.error("Error reading or writing contacts:", error.message);
-    throw error;
+    handleError(error);
   }
+}
+
+function handleError(error) {
+  console.error("Error reading or writing contacts:", error.message);
+  throw error;
 }
 
 module.exports = {
